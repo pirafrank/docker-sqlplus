@@ -5,16 +5,16 @@ RUN apt-get -y update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ENV VERSION 12.1.0.2.0
+ARG SQLPLUS_VERSION
 
-COPY instantclient-*-${VERSION}.zip /opt/
+COPY instantclient-*-${SQLPLUS_VERSION}.zip /opt/
 
 WORKDIR /opt/
-RUN unzip /opt/instantclient-basic-linux.x64-${VERSION}.zip \
- && unzip /opt/instantclient-sqlplus-linux.x64-${VERSION}.zip \
- && unzip /opt/instantclient-sdk-linux.x64-${VERSION}.zip \
- && unzip /opt/instantclient-jdbc-linux.x64-${VERSION}.zip \
- && rm -v /opt/instantclient-*-${VERSION}.zip \
+RUN unzip /opt/instantclient-basic-linux.x64-${SQLPLUS_VERSION}.zip \
+ && unzip /opt/instantclient-sqlplus-linux.x64-${SQLPLUS_VERSION}.zip \
+ && unzip /opt/instantclient-sdk-linux.x64-${SQLPLUS_VERSION}.zip \
+ && unzip /opt/instantclient-jdbc-linux.x64-${SQLPLUS_VERSION}.zip \
+ && rm -v /opt/instantclient-*-${SQLPLUS_VERSION}.zip \
  && mv -v /opt/instantclient* /opt/instantclient
 
 COPY login.sql /opt/instantclient
